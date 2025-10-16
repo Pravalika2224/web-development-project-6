@@ -1,0 +1,61 @@
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  padding: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+}
+
+.planner {
+  max-width: 600px;
+  margin: auto;
+}
+
+.hour-block {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.hour {
+  width: 80px;
+  background: #007bff;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.task {
+  flex: 1;
+}
+
+.task input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.buttons {
+  text-align: center;
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.save-btn {
+  background-color: #28a745;
+  color: white;
+  border: none;
+}
+
+.clear-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
