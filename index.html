@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Personal Daily Planner</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .planner {
+      max-width: 600px;
+      margin: auto;
+    }
+    .hour-block {
+      display: flex;
+      margin-bottom: 10px;
+    }
+    .hour {
+      width: 80px;
+      background: #007bff;
+      color: white;
+      text-align: center;
+      padding: 10px 0;
+    }
+    .task {
+      flex: 1;
+    }
+    .task input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+    }
+    .buttons {
+      text-align: center;
+      margin-top: 20px;
+    }
+    button {
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+    }
+    .save-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+    }
+    .clear-btn {
+      background-color: #dc3545;
+      color: white;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+  <h1>🗓️ Personal Daily Planner</h1>
+  <div class="planner" id="planner">
+    <!-- Hour blocks will be inserted here -->
+  </div>
+
+  <div class="buttons">
+    <button class="save-btn" onclick="saveTasks()">Save Tasks</button>
+    <button class="clear-btn" onclick="clearTasks()">Clear All</button>
+  </div>
+
+  <script>
+    const plannerEl = document.getElementById('planner');
+    const startHour = 8; // 8 AM
+    const endHour = 17;  // 5 PM
+
+    function loadPlanner() {
+      for (let hour = startHour; hour <= endHour; hour++) {
+        const hourLabel = (hour <= 12 ? hour : hour - 12) + (hour < 12 ? ' AM' : ' PM');
+        const taskValue = localStorage.getItem(`task-${hour}`) || '';
+
+        const block = document.createElement('div');
+        block.className = 'hour-block';
+        block.innerHTML = `
+          <div class="hour">${hourLabel}</div>
+          <div class="task">
+            <input type="text" id="input-${hour}" value="${taskValue}" placeholder="Enter your task...">
+          </div>
+        `;
+        plannerEl.appendChild(block);
+      }
+    }
+
+    function saveTasks() {
+      for (let hour = startHour; hour <= endHour; hour++) {
+        const task = document.getElementById(`input-${hour}`).value;
+        localStorage.setItem(`task-${hour}`, task);
+      }
+      alert('Tasks saved!');
+    }
+
+    function clearTasks() {
+      if (confirm("Are you sure you want to clear all tasks?")) {
+        for (let hour = startHour; hour <= endHour; hour++) {
+          localStorage.removeItem(`task-${hour}`);
+          document.getElementById(`input-${hour}`).value = '';
+        }
+      }
+    }
+
+    loadPlanner();
+  </script>
+</body>
+</html>
